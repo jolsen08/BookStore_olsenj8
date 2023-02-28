@@ -1,0 +1,24 @@
+﻿@*This page is a partial view that will be referenced by the Index page. Essentially everything we want to 
+    see on the Index page will be included here*@
+
+@model Book
+
+<div class="card card-outline-primary m-1 p-1">
+    <div class="bg-faded p-1">
+        @*We include the Title of the Book in this h4 tag*@
+        <h4>
+            @Model.Title
+            @*The price of the book will be placed in a blue pill badge to the right of the book title*@
+            <span class="badge badge-pill badge-primary " style="float:right">
+                <small>@Model.Price.ToString("c")</small>
+            </span>
+        </h4>
+    </div>
+    @*The following divs include all the information stored for each book and will be shown to the user*@
+    <div class="card-text p-1">Author: @Model.Author</div>
+    <div class="card-text p-1">Publisher: @Model.Publisher</div>
+    <div class="card-text p-1">ISBN: @Model.Isbn</div>
+    <div class="card-text p-1">Classification: @Model.Classification</div>
+    <div class="card-text p-1">Category: @Model.Category</div>
+    <div class="card-text p-1">Number of Pages: @Model.PageCount</div>
+</div>

@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>BookStore</title>
+    @*Importing the css we have in our wwwrootfolder from twitter*@
+    <link href="/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="bg-dark text-white p-2">
+        <span class="navbar-brand m1-2">BOOK STORE</span>
+    </div>
+
+   @*Not sure what this div was for, just following along in the book*@
+    <div class="row m-1 p-1">
+        <div id="categories" class="col-3">
+            Put something useful here later.
+        </div>
+
+    </div>
+
+    @*Here we render the body, which will then reference our partial view "BookSummary"*@
+    <div class="col-9">
+        @RenderBody()
+    </div>
+</body>
+</html>

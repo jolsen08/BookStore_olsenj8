@@ -1,0 +1,20 @@
+﻿@{ 
+}
+
+@*Using the BooksViewModel*@
+@model BooksViewModel
+
+<h1>The Book Store</h1>
+
+@*This for loop will iterate through each object in the Books table in our model*@
+@foreach (Book b in Model.Books)
+{
+    //Simply referencing the BookSummary page for the partial view. All we need to pass in is the b object
+    <partial name="BookSummary" model="b" />
+}
+
+@*Here is the div for the bottom of the page. It includes the page classes which are enabled (reference the 
+    PaginationTagHelper if statement)*@
+<div page-blah="@Model.PageInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
+     page-class-normal="btn-outline-dark" page-class-selected="btn-primary" class="btn-group pull-right m-1">
+</div>
