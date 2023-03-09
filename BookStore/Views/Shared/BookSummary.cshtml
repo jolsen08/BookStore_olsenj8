@@ -24,6 +24,9 @@
         <li><b>Page Count: </b>@Model.PageCount</li>
     </ul>
 
+    @*Here we add a button for the user to add the book to their cart, which sends hidden input data to Methods which will be used
+        to add the correct book to the cart as well as come up with the correct return Url once the user wants to continue shopping
+        after adding an item to the cart*@
     <form method="post" asp-page="/Buy">
 
         <input type="hidden" asp-for="@Model.BookId" />
