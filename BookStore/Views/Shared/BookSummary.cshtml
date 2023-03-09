@@ -14,11 +14,25 @@
             </span>
         </h4>
     </div>
-    @*The following divs include all the information stored for each book and will be shown to the user*@
-    <div class="card-text p-1">Author: @Model.Author</div>
-    <div class="card-text p-1">Publisher: @Model.Publisher</div>
-    <div class="card-text p-1">ISBN: @Model.Isbn</div>
-    <div class="card-text p-1">Classification: @Model.Classification</div>
-    <div class="card-text p-1">Category: @Model.Category</div>
-    <div class="card-text p-1">Number of Pages: @Model.PageCount</div>
+
+    <ul class="card-text p-1">
+        <li><b>Author: </b>@Model.Author</li>
+        <li><b>Publisher: </b>@Model.Publisher</li>
+        <li><b>ISBN: </b>@Model.Isbn</li>
+        <li><b>Classification: </b>@Model.Classification</li>
+        <li><b>Category: </b>@Model.Category</li>
+        <li><b>Page Count: </b>@Model.PageCount</li>
+    </ul>
+
+    <form method="post" asp-page="/Buy">
+
+        <input type="hidden" asp-for="@Model.BookId" />
+        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+
+        <span class="card-text">
+            <button type="Submit" class="btn btn-success float-lg-right">Add To Cart</button>
+        </span>
+    </form>
 </div>
+
+
