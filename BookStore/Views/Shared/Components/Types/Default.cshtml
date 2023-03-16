@@ -1,0 +1,18 @@
+﻿
+@{
+}
+
+@model IEnumerable<string>
+<div class="d-grid gap-2 bg-dark">
+
+
+    <a asp-controller="Home" asp-action="Index" asp-route-pageNum ="1" asp-route-bookCategory="" class="btn btn-outline-secondary shadow card card-header-pills">Home</a>
+
+    @foreach (string c in Model)
+    {
+        <a asp-controller="Home" asp-action="Index" asp-route-bookCategory="@c"  asp-route-pageNum="1"
+           class="btn shadow card card-header-pills @(ViewBag.SelectedCategory == c ? "btn-primary bg-dark" : "btn-outline-secondary")">@c</a>
+    }
+</div>
+
+

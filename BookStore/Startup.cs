@@ -36,6 +36,16 @@ namespace BookStore
            });
 
             services.AddScoped<IBookStoreRepository, EFBookStoreRepository>();
+            services.AddScoped<IPurchaseRepository, EFPurchaseRepository>();
+
+            services.AddRazorPages();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+
+            //Using the GetCart method, which will either continue an existing session if it exists or start a new one
+            services.AddScoped<Cart>(x => SessionCart.GetCart(x));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,13 +58,29 @@ namespace BookStore
 
             //Telling the program to use the files in the wwwroot folder
             app.UseStaticFiles();
+            app.UseSession();
 
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("categorypage",
+                    "{bookCategory}/Page{pageNum}",
+                    new { Controller = "Home", action = "Index" });
+
+                endpoints.MapControllerRoute(
+                  name: "Paging",
+                  pattern: "Page{pageNum}",
+                  defaults: new { Controller = "Home", action = "Index", pageNum = 1 }
+                  );
+
+                endpoints.MapControllerRoute("category",
+                    "{bookCategory}",
+                    new { Controller = "Home", action = "Index", pageNum = 1 });
+              
                 //Follow MVC route pattern
                 endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
             });
         }
     }

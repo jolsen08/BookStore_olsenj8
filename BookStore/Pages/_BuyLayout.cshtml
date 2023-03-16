@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+
+@*Here we have our layout for our razor pages for the cart. This is where we link in the css to make it look similar to our other pages*@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="bg-dark text-white p-2">
+        BOOK STORE
+    </div>
+
+    <div class="m-1 p-1">
+        @RenderBody()
+    </div>
+</body>
+</html>

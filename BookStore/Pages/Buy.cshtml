@@ -1,0 +1,58 @@
+﻿ @page
+@model BookStore_olsenj8.Pages.BuyModel
+@{
+}
+
+@*Here is our Cart View razor page. Here we build a table to show relevant information based on what the customer has added 
+    to their cart*@
+<h2>Your Cart</h2>
+
+<table class="table table-bordered table-striped">
+@*Creating a table head with a row that includes the table headers for each thing we want to keep track of*@
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Cost</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+
+    <tbody>
+@*Here we iterate through each of the items in the cart and build rows for each item, placing the attributes in their proper place*@
+        @foreach(var i in Model.cart.Items)
+            {
+                <tr>
+                    <td>@i.Book.Title</td>
+                    <td>@i.Quantity</td>
+                    <td>@i.Book.Price.ToString("c")</td>
+                    @*This item in the row will display the total price of the line buy multiplying the quantity with the book price*@
+                    <td>@((i.Quantity * i.Book.Price).ToString("c"))</td>
+
+                    <td class="text-center">
+                        <form method="post" asp-page-handler="Remove">
+                            <input type="hidden" name="bookId" value="@i.Book.BookId" />
+                            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                            <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+    </tbody>
+
+    <tfoot>
+@*Here we add another row that will show the total amount due in currency format*@
+        <tr>
+            <td colspan="3">Total:</td>
+            <td>@Model.cart.CalculateTotal().ToString("c")</td>
+        </tr>
+    </tfoot>
+</table>
+
+@*Here we add our button which will reference the ReturnUrl so the user can return to the page they were 
+    on before adding an item to their cart*@
+<div>
+    <a class="btn btn-primary" href="@Model.ReturnUrl">Continue Shopping</a>
+    <a class="btn btn-primary" asp-controller="Purchase" asp-action="Checkout">Checkout</a>
+</div>
+
